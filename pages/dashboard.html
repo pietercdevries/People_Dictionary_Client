@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Pieter de Vries">
+
+        <title>Dashboard · People Search</title>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../css/bootstrap.css">
+
+        <!-- Main styles for this page. -->
+        <link rel="stylesheet" href="../css/dashboard.css">
+    </head>
+    <body ng-app="searchPeopleApp" ng-controller="dashboardController">
+        <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">People Search</a>
+            <input class="form-control form-control-dark w-100 autocomplete" type="text" placeholder="Search" aria-label="Search" id="search">
+            <ul class="navbar-nav px-3">
+                <li class="nav-item text-nowrap">
+                    <a class="nav-link" href="../index.html">Sign out</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">
+                                    <span data-feather="home"></span>
+                                    Dashboard <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file"></span>
+                                    Add New User
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="shopping-cart"></span>
+                                    Import
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link export" href="#">
+                                    <span data-feather="users"></span>
+                                    Export
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="bar-chart-2"></span>
+                                    Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="layers"></span>
+                                    Users
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dashboard</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group mr-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Import</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary export">Export</button>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Add New Person</button>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h2>People</h2>
+                    <div class="table-responsive" id="table-container">
+                        <table class="table table-striped table-sm" id="people-table">
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="(key, value) in People[0]">{{key}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="(key, value) in People">
+                                    <td ng-repeat="(key, value) in value">{{value}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+
+    <!-- Main Javascript files.-->
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/jquery-3.4.1.min.js"></script>
+    <script src="../js/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/feather.min.js"></script>
+    <script src="../js/dashboard.js"></script>
+</html>
