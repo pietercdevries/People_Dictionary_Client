@@ -102,6 +102,11 @@ $(document).ready(function() {
         source: availableTags
     });
 
+    $("#search").on('click change keydown past', function(event) {
+        availableTags = new Array();
+        getSuggestionData();
+    });
+
     $(".export").on('click', function(event) {
         // CSV
 
