@@ -3,21 +3,24 @@ var availableTags = new Array();
 var app = angular.module('searchPeopleApp', []);
 
 var dashboardController = app.controller('dashboardController', function($scope, $http) {
+    $loading.show();
+
     $scope.loadData = function() {
         var searchValue = document.getElementById("search").value;
 
         $http.get("http://localhost:5001/api/people?name=" + searchValue)
             .then(function (response) {
-                if(response == null)
-                {
-                    $('.no-people').show();
-                }
-                else
-                {
-                    $('.no-people').hide();
-                }
+                    if(response == null)
+                    {
+                        $('.no-people').show();
+                    }
+                    else
+                    {
+                        $('.no-people').hide();
+                    }
 
-                $scope.People = response.data;
+                    $scope.People = response.data;
+                    $loading.hide();
             });
     }
 
@@ -100,6 +103,8 @@ function exportTableToCSV($table, filename) {
 }
 
 function getSuggestionData(){
+    $loading.show();
+
     $.ajax({
         url: "http://localhost:5001/api/people/",
         data: {
@@ -126,10 +131,14 @@ function getSuggestionData(){
                         availableTags.push(value.LastName);
                     }
                 }
+
+                $loading.hide();
             });
         }
     });
 }
+
+var $loading = $('#loadingDivOverlay').hide();
 
 $(document).ready(function() {
     feather.replace();

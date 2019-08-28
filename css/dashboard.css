@@ -7,6 +7,34 @@
     user-select: none;
 }
 
+#loadingDiv{
+    width: 75%;
+    position: fixed;
+    left: 55%;
+    top: 400px;
+    margin-left: -37.5%;
+    text-align: center;
+    z-index: 100;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(1,1,1,0.1);
+    z-index: 200;
+}
+
+#loader-image{
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+}
+
 .datepicker td, .datepicker th {
     width: 1.5em;
     height: 1.5em;
