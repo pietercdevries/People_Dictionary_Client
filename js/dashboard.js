@@ -1,11 +1,18 @@
 var availableTags = new Array();
 
 var app = angular.module('searchPeopleApp', []);
-app.controller('dashboardController', function($scope, $http) {
-    $http.get("https://localhost:5001/api/people/")
-        .then(function(response) {
-            $scope.People = response.data;
-        });
+
+var dashboardController = app.controller('dashboardController', function($scope, $http) {
+    $scope.loadData = function() {
+        var searchValue = document.getElementById("search").value;
+
+        $http.get("http://localhost:5001/api/people?name=" + searchValue)
+            .then(function (response) {
+                $scope.People = response.data;
+            });
+    }
+
+    $scope.loadData();
 });
 
 function exportTableToCSV($table, filename) {
@@ -79,7 +86,7 @@ function exportTableToCSV($table, filename) {
 
 function getSuggestionData(){
     $.ajax({
-        url: "https://localhost:5001/api/people/",
+        url: "http://localhost:5001/api/people/",
         data: {
             name: $( "#search" ).val(),
             offset: 0,
@@ -89,22 +96,36 @@ function getSuggestionData(){
             var obj = JSON.parse(result);
 
             $.each(obj, function(key,value) {
-                availableTags.push(value.FirstName + " " + value.LastName);
+                var searchValue = $( "#search" ).val();
+                if (value.FirstName.toString().toLocaleLowerCase().indexOf(searchValue.toLowerCase()) >= 0)
+                {
+                    // Prevent duplicates
+                    if (availableTags.includes(value.FirstName) == false) {
+                        availableTags.push(value.FirstName);
+                    }
+                }
+                else
+                {
+                    // Prevent duplicates
+                    if (availableTags.includes(value.LastName) == false) {
+                        availableTags.push(value.LastName);
+                    }
+                }
             });
         }
     });
 }
 
 $(document).ready(function() {
-    getSuggestionData();
+    feather.replace();
 
-    $(".autocomplete").autocomplete({
-        source: availableTags
-    });
-
-    $("#search").on('click change keydown past', function(event) {
+    $("#search").on('keydown past', function(event) {
         availableTags = new Array();
         getSuggestionData();
+
+        $(".autocomplete").autocomplete({
+            source: availableTags
+        });
     });
 
     $(".export").on('click', function(event) {
