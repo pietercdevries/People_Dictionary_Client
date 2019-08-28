@@ -7,11 +7,21 @@
     user-select: none;
 }
 
+.datepicker td, .datepicker th {
+    width: 1.5em;
+    height: 1.5em;
+}
+
 .avatar{
     width: 32px;
     height: 32px;
     border-radius: 5px;
 }
+
+.required{
+    color: #850000;
+}
+
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
         font-size: 3.5rem;

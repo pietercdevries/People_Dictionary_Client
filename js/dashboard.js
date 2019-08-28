@@ -8,11 +8,26 @@ var dashboardController = app.controller('dashboardController', function($scope,
 
         $http.get("http://localhost:5001/api/people?name=" + searchValue)
             .then(function (response) {
+                if(response == null)
+                {
+                    $('.no-people').show();
+                }
+                else
+                {
+                    $('.no-people').hide();
+                }
+
                 $scope.People = response.data;
             });
     }
 
     $scope.loadData();
+
+    $scope.calculateAge = function calculateAge(birthday) { // birthday is a date
+        var ageDifMs = Date.now() - new Date(birthday).getTime();
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
 });
 
 function exportTableToCSV($table, filename) {
@@ -118,6 +133,13 @@ function getSuggestionData(){
 
 $(document).ready(function() {
     feather.replace();
+
+    $('.datepicker').datepicker({
+        weekStart: 1,
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $('.datepicker').datepicker("setDate", new Date());
 
     $("#search").on('keydown past', function(event) {
         availableTags = new Array();
