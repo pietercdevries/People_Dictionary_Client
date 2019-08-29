@@ -47,27 +47,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <span data-feather="upload"></span>
-                                        Import
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link export" href="#">
                                         <span data-feather="download"></span>
                                         Export
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <span data-feather="user"></span>
-                                        Profile
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">
-                                        <span data-feather="users"></span>
-                                        Users
                                     </a>
                                 </li>
                             </ul>
@@ -83,10 +65,7 @@
                                     <option value="2000">Slow Speed</option>
                                     <option value="3000">Crawling Speed</option>
                                 </select>
-                                <div class="btn-group mr-2">
-                                    <a class="btn btn-sm btn-outline-secondary" href="#" >Import</a>
-                                    <a class="btn btn-sm btn-outline-secondary export" href="#" >Export</a>
-                                </div>
+                                <div class="exportButton"><a class="btn btn-sm btn-outline-secondary export" href="#" >Export</a></div>
                                 <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#newPersonModal">Add New Person</button>
                             </div>
                         </div>
@@ -129,22 +108,6 @@
                             </table>
                         </div>
                         <div ng-show="httpError" class="alert alert-secondary" role="alert">No Records found! Maybe add some people to the list.</div>
-                        <div>{{totalPages}}</div>
-                        <nav ng-show="people" aria-label="Page navigation">
-                            <ul class="pagination pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item" aria-current="page">
-                                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
                     </main>
                 </div>
             </div>
@@ -281,5 +244,14 @@
     <script src="../js/bootstrap.js"></script>
     <script src="../js/feather.min.js"></script>
     <script src="../js/bootstrap-datepicker.min.js"></script>
+    <script src="../js/ExportTableToCSV.js"></script>
     <script src="../js/dashboard.js"></script>
+
+    <!-- Angular Controllers-->
+    <script src="../js/Controllers/AddPersonController.js"></script>
+    <script src="../js/Controllers/DashboardController.js"></script>
+
+    <!-- Angular App-->
+    <script src="../js/app.js"></script>
+
 </html>

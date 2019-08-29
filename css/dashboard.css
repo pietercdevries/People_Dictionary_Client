@@ -17,6 +17,10 @@
     z-index: 100;
 }
 
+.exportButton{
+    margin: 0 8px 0 0px;
+}
+
 .overlay{
     position: fixed;
     top: 0;
