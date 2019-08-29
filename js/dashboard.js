@@ -1,10 +1,11 @@
-var availableTags = new Array();
-
 (function()
 {
     var app = angular.module('searchPeopleApp', []);
+    var availableTags = new Array();
 
     var DashboardController = function ($scope, $http) {
+        var $loading = $('#loadingDivOverlay');
+
         $scope.loadData = function () {
             $loading.show();
 
@@ -13,11 +14,12 @@ var availableTags = new Array();
                 searchValue = $scope.searchValue
             };
 
-            $http.get("http://localhost:5001/api/people?name=" + searchValue)
+            $http.get("http://localhost:5001/api/people?name=" + searchValue + "&speed=" + $scope.speed)
                 .then(onSuccess, onError);
         };
 
         var onSuccess = function(response) {
+            addAutocompleteOptions(response.data);
             $scope.people = response.data;
             $loading.hide();
         };
@@ -25,6 +27,24 @@ var availableTags = new Array();
         var onError = function(reason) {
             $scope.httpError = reason;
         };
+
+        var addAutocompleteOptions = function(people){
+            availableTags = new Array();
+
+            $.each(people, function(key,value) {
+                if(availableTags.indexOf(value.FirstName) < 0) {
+                    availableTags.push(value.FirstName);
+                }
+
+                if(availableTags.indexOf(value.LastName) < 0) {
+                    availableTags.push(value.LastName);
+                }
+            });
+
+            $(".autocomplete").autocomplete({
+                source: availableTags
+            }).focus();
+        }
 
         $scope.loadData();
 
@@ -35,8 +55,27 @@ var availableTags = new Array();
         };
     };
 
-    app.controller('DashboardController', ['$scope','$http', DashboardController]);
+    function init(){
+        feather.replace();
 
+        $('.datepicker').datepicker({
+            weekStart: 1,
+            autoclose: true,
+            todayHighlight: true,
+        });
+
+        $('.datepicker').datepicker("setDate", new Date());
+
+        $(".export").on('click', function(event) {
+            var args = [$('#table-container>table'), 'export.csv'];
+
+            exportTableToCSV.apply(this, args);
+        });
+    }
+
+    init();
+
+    app.controller('DashboardController', ['$scope','$http', DashboardController]);
 }());
 
 function exportTableToCSV($table, filename) {
@@ -108,69 +147,4 @@ function exportTableToCSV($table, filename) {
     }
 }
 
-function getSuggestionData(){
-    $loading.show();
-
-    $.ajax({
-        url: "http://localhost:5001/api/people/",
-        data: {
-            name: $( "#search" ).val(),
-            offset: 0,
-            limit: 10
-        },
-        success: function( result ) {
-            var obj = JSON.parse(result);
-
-            $.each(obj, function(key,value) {
-                var searchValue = $( "#search" ).val();
-                if (value.FirstName.toString().toLocaleLowerCase().indexOf(searchValue.toLowerCase()) >= 0)
-                {
-                    // Prevent duplicates
-                    if (availableTags.includes(value.FirstName) == false) {
-                        availableTags.push(value.FirstName);
-                    }
-                }
-                else
-                {
-                    // Prevent duplicates
-                    if (availableTags.includes(value.LastName) == false) {
-                        availableTags.push(value.LastName);
-                    }
-                }
-
-                $loading.hide();
-            });
-        }
-    });
-}
-
-var $loading = $('#loadingDivOverlay').hide();
-
-$(document).ready(function() {
-    feather.replace();
-
-    $('.datepicker').datepicker({
-        weekStart: 1,
-        autoclose: true,
-        todayHighlight: true,
-    });
-    $('.datepicker').datepicker("setDate", new Date());
-
-    $("#search").on('keydown past', function(event) {
-        availableTags = new Array();
-        getSuggestionData();
-
-        $(".autocomplete").autocomplete({
-            source: availableTags
-        });
-    });
-
-    $(".export").on('click', function(event) {
-        // CSV
-
-        var args = [$('#table-container>table'), 'export.csv'];
-
-        exportTableToCSV.apply(this, args);
-    });
-});
 

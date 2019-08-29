@@ -77,6 +77,11 @@
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">Dashboard</h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
+                            <select ng-model="speed" class="mr-2 speed">
+                                <option value="">Normal Speed</option>
+                                <option value="2000">Slow Speed</option>
+                                <option value="3000">Crawling Speed</option>
+                            </select>
                             <div class="btn-group mr-2">
                                 <a class="btn btn-sm btn-outline-secondary" href="#" >Import</a>
                                 <a class="btn btn-sm btn-outline-secondary export" href="#" >Export</a>
@@ -89,7 +94,7 @@
 
                     <h2>People</h2>
                     <div ng-show="people" class="table-responsive" id="table-container">
-                        <table class="table table-striped table-sm" id="people-table">
+                        <table ng-cloak class="table table-striped table-sm" id="people-table">
                             <thead>
                                 <tr>
                                     <th></th>

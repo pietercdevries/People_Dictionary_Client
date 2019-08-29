@@ -40,6 +40,12 @@
     height: 1.5em;
 }
 
+.speed{
+    color: #6c757d;
+    border-color: #6c757d;
+    background-color: transparent;
+}
+
 .avatar{
     width: 32px;
     height: 32px;
