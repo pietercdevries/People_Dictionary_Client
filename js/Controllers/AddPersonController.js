@@ -1,6 +1,5 @@
 // This controller is responsible for creating a new user.
 var AddPersonController = function ($scope, $http, $timeout) {
-
     // Set the server for connecting to get the people.
     var server = "http://localhost:5001/api/people";
 
