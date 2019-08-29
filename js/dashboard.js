@@ -16,12 +16,13 @@
             };
 
             $http.get(server + "?name=" + searchValue + "&speed=" + $scope.speed)
-                .then(onSuccess, onError);
+                 .then(onSuccess, onError);
         };
 
-        var onSuccess = function(response) {
-            addAutocompleteOptions(response.data);
+        var onSuccess = function(response, status, headers, config) {
+            $scope.totalPages = Math.ceil(headers['People-Total-Count'] / 10)
             $scope.people = response.data;
+            addAutocompleteOptions(response.data);
             $loading.hide();
         };
 
