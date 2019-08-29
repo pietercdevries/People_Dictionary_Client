@@ -1,37 +1,43 @@
 var availableTags = new Array();
 
-var app = angular.module('searchPeopleApp', []);
+(function()
+{
+    var app = angular.module('searchPeopleApp', []);
 
-var dashboardController = app.controller('dashboardController', function($scope, $http) {
-    $loading.show();
+    var DashboardController = function ($scope, $http) {
+        $scope.loadData = function () {
+            $loading.show();
 
-    $scope.loadData = function() {
-        var searchValue = document.getElementById("search").value;
+            var searchValue = "";
+            if($scope.searchValue != null ){
+                searchValue = $scope.searchValue
+            };
 
-        $http.get("http://localhost:5001/api/people?name=" + searchValue)
-            .then(function (response) {
-                    if(response == null)
-                    {
-                        $('.no-people').show();
-                    }
-                    else
-                    {
-                        $('.no-people').hide();
-                    }
+            $http.get("http://localhost:5001/api/people?name=" + searchValue)
+                .then(onSuccess, onError);
+        };
 
-                    $scope.People = response.data;
-                    $loading.hide();
-            });
-    }
+        var onSuccess = function(response) {
+            $scope.people = response.data;
+            $loading.hide();
+        };
 
-    $scope.loadData();
+        var onError = function(reason) {
+            $scope.httpError = reason;
+        };
 
-    $scope.calculateAge = function calculateAge(birthday) { // birthday is a date
-        var ageDifMs = Date.now() - new Date(birthday).getTime();
-        var ageDate = new Date(ageDifMs); // miliseconds from epoch
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
-});
+        $scope.loadData();
+
+        $scope.calculateAge = function calculateAge(birthday) { // birthday is a date
+            var ageDifMs = Date.now() - new Date(birthday).getTime();
+            var ageDate = new Date(ageDifMs); // miliseconds from epoch
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
+        };
+    };
+
+    app.controller('DashboardController', ['$scope','$http', DashboardController]);
+
+}());
 
 function exportTableToCSV($table, filename) {
 
