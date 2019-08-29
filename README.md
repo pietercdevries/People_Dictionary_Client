@@ -1,6 +1,6 @@
 ## People Search Client
 
-This client was made using AngularJS and Bootstrap. You can search people and add new ones. We also added the ability to export the users. This project should demonstrate the ability to load from an API and have it simulate slow speeds.
+This client was made using AngularJS and Bootstrap. You can search people and add new ones. I also added the ability to export users. This project should demonstrate the ability to load from an API and have it simulate slow speeds.
 
 ## Code Example
 
@@ -102,7 +102,7 @@ When you are all done you should be able to see the login screen of the people s
 
 ## Reference
 
-The web application is made using AngularJS and Bootstrap for the UI. I have used Jquery UI for the autocomplete and datepicker components. There are 2 pages and they are the login page and the dashboard. The login screen does not have a controller as it does not do anything at the moement. The dashboard has 2 controllers one for adding users and one for the loading, searching and displaying of people. 
+The web application is made using AngularJS and Bootstrap for the UI. I have used Jquery UI for the autocomplete and datepicker components. There are 2 pages and they are the login page and the dashboard. The login screen does not have a controller as it does not do anything at the moment. The dashboard has 2 controllers one for adding users and one for the loading, searching and displaying of people. 
 
 ## Contributors
 
