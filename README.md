@@ -2,6 +2,8 @@
 
 This client was made using AngularJS and Bootstrap. You can search people and add new ones. I also added the ability to export users. This project should demonstrate the ability to load from an API and have it simulate slow speeds.
 
+See: [https://people-dictionary.azurewebsites.net](https://people-dictionary.azurewebsites.net/) to see a running sample
+
 ## Code Example
 
 ```javascript
