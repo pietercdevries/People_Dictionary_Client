@@ -1,10 +1,3 @@
-## People Search Client
-
-This client was made using AngularJS and Bootstrap. You can search people and add new ones. I also added the ability to export users. This project should demonstrate the ability to load from an API and have it simulate slow speeds.
-
-## Code Example
-
-```javascript
 // This controller is in charge of the data and the search.
 var DashboardController = function ($scope, $http) {
     var availableTags = new Array(); // This is for the autocomplete list data source.
@@ -77,43 +70,3 @@ var DashboardController = function ($scope, $http) {
         return Math.abs(ageDate.getUTCFullYear() - 1970);
     };
 };
-```
-
-## Motivation
-
-I wanted to display how you could use bootstrap and AngularJS to create a web application.
-
-## Installation
-
-Place the files on your webserver and adjust the API addresses so it can reach your API server address.
-
-Look in the following files:
-
-1. js/Controllers/AddPersonController.js
-2. js/Controllers/DashboardController.js
-
-You will see this line in both controller and need to be adjusted to the adress of the API server.
-
-```js
-var server = "http://localhost:5001/api/people";
-```
-
-When you are all done you should be able to see the login screen of the people search application.
-
-## Reference
-
-The web application is made using AngularJS and Bootstrap for the UI. I have used Jquery UI for the autocomplete and datepicker components. There are 2 pages and they are the login page and the dashboard. The login screen does not have a controller as it does not do anything at the moment. The dashboard has 2 controllers one for adding users and one for the loading, searching and displaying of people. 
-
-## Contributors
-
-Pieter de Vries
-
-## License
-
-GNU GENERAL PUBLIC LICENSE
-Version 2, June 1991
-
-Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
-Everyone is permitted to copy and distribute verbatim copies
-of this license document, but changing it is not allowed.
